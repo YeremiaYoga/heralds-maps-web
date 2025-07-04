@@ -1,13 +1,23 @@
-export default function Header() {
+export default function Navbar() {
   return (
-    <header className="bg-[#171a21] text-white px-8 py-4 flex justify-between items-center">
-      <div className="font-bold text-xl">MAPS</div>
-      <nav className="space-x-6 text-sm">
-        <a href="#">Patreon</a>
-        <a href="#" className="hover:text-blue-400">
-          Login
-        </a>
-      </nav>
+    <header className="bg-[#222122] text-white">
+      <div className="max-w-[1200px] mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <img
+            src="/assets/heraldsmaps_logo.webp"
+            alt="Herald Maps Logo"
+            className="h-8 w-8 object-contain"
+          />
+          <span className="font-bold text-2xl">HERALDS MAPS</span>
+        </div>
+
+        <nav className="space-x-6 text-sm">
+          <a href="#">Patreon</a>
+          <a href="#" className="hover:text-blue-400">
+            Login
+          </a>
+        </nav>
+      </div>
     </header>
   );
 }
