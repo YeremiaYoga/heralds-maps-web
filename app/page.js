@@ -9,9 +9,8 @@ import CategoryCarousel from "../components/CategoryCarousel";
 export default function HomePage() {
   return (
     <div>
-      <main className="bg-[url('/assets/bg_gray.webp')] bg-repeat bg-[length:400px] min-h-screen text-white">
-        <Navbar />
-        <div className="max-w-[1200px] mx-auto px-4">
+      <main >
+        <div >
           <SubNavbar />
           <HeroBanner />
           <MapsCarousel />

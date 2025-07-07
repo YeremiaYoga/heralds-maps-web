@@ -1,39 +1,7 @@
 import { useMemo } from "react";
 
-const maps = [
-  {
-    title: "Summer Forest Road Map",
-    image: "/assets/dummy/summer_forest_road.webp",
-    original: 9.99,
-  },
-  {
-    title: "Desert Ruin Map",
-    image: "/assets/dummy/desert_ruin.webp",
-    original: 24.99,
-  },
-  {
-    title: "Ruin Building within Swamp",
-    image: "/assets/dummy/ruin_building_within_swamp.webp",
-    original: 14.99,
-  },
-  {
-    title: "Forest with a Small Lake",
-    image: "/assets/dummy/forest_with_a_small_lake.webp",
-    original: 19.99,
-  },
-  {
-    title: "Magical Store within City",
-    image: "/assets/dummy/magical_store_within_city.webp",
-    original: 4.99,
-  },
-  {
-    title:
-      "Greek Style City Center with a Fountain as Middle Part Top Version 1",
-    image:
-      "/assets/dummy/greek_style_city_center_with_a_fountain_as_middle_part_top_version_1.webp",
-    original: 39.99,
-  },
-];
+
+import { maps } from "@/data/maps";
 
 // Format number to USD
 function formatUSD(value) {
