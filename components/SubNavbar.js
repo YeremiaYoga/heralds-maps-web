@@ -9,6 +9,7 @@ export default function SubNav() {
       </Link>
       <a href="#">Tutorials</a>
       <a href="#">Info & FAQ</a>
+      <a href="#">Subcribe</a>
     </div>
   );
 }

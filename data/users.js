@@ -1,0 +1,58 @@
+const users = [
+  {
+    id: 1,
+    name: "Alice Johnson",
+    email: "alice@example.com",
+    subscribed: true,
+    subscriptionType: "monthly",
+    subscriptionTier: "premium",
+    subscriptionEnd: "2025-08-08T00:00:00.000Z",
+  },
+  {
+    id: 2,
+    name: "Bob Smith",
+    email: "bob@example.com",
+    subscribed: false,
+    subscriptionType: "yearly",
+    subscriptionTier: "standard",
+    subscriptionEnd: null,
+  },
+  {
+    id: 3,
+    name: "Charlie Lee",
+    email: "charlie@example.com",
+    subscribed: true,
+    subscriptionType: "yearly",
+    subscriptionTier: "standard",
+    subscriptionEnd: "2026-07-01T00:00:00.000Z",
+  },
+  {
+    id: 4,
+    name: "Diana Prince",
+    email: "diana@example.com",
+    subscribed: true,
+    subscriptionType: "monthly",
+    subscriptionTier: "premium",
+    subscriptionEnd: "2025-07-31T00:00:00.000Z",
+  },
+  {
+    id: 5,
+    name: "Edward Blake",
+    email: "edward@example.com",
+    subscribed: false,
+    subscriptionType: "monthly",
+    subscriptionTier: "standard",
+    subscriptionEnd: null,
+  },
+  {
+    id: 6,
+    name: "Fiona Scott",
+    email: "fiona@example.com",
+    subscribed: true,
+    subscriptionType: "yearly",
+    subscriptionTier: "premium",
+    subscriptionEnd: "2026-06-01T00:00:00.000Z",
+  },
+];
+
+export default users;

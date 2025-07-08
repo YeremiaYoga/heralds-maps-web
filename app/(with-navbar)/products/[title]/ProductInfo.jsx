@@ -1,4 +1,13 @@
 export default function ProductInfo({ product }) {
+  const isFree = product.price === 0 || product.free;
+  const gridTiles =
+    product.dimensions && product.gridSize
+      ? {
+          x: Math.round(product.dimensions.width / product.gridSize),
+          y: Math.round(product.dimensions.height / product.gridSize),
+        }
+      : null;
+
   return (
     <div className="w-full md:w-1/3 p-6 rounded-lg bg-black/70 text-white shadow-lg space-y-6">
       <div>
@@ -6,12 +15,7 @@ export default function ProductInfo({ product }) {
           Description
         </h2>
         <p className="text-sm text-gray-300 leading-relaxed">
-          Quiet, green, and deceptively peaceful, this forest road is a classic
-          setting for countless adventures. Whether it’s the start of a long
-          journey, the site of a tense standoff, or the perfect place for an
-          ambush, this map offers a flexible space for exploration and combat.
-          Easy to drop into nearly any campaign, and to return to in different
-          seasons.
+          {product.description || "No description provided."}
         </p>
       </div>
 
@@ -22,15 +26,22 @@ export default function ProductInfo({ product }) {
         <div className="text-sm space-y-2">
           <div className="flex justify-between">
             <span className="font-semibold">Grid tiles</span>
-            <span>18 × 22</span>
+            <span>{gridTiles ? `${gridTiles.x} × ${gridTiles.y}` : "-"}</span>
           </div>
+
           <div className="flex justify-between">
             <span className="font-semibold">Grid size</span>
-            <span>140 pixels per tile</span>
+            <span>
+              {product.gridSize ? `${product.gridSize} pixels per tile` : "-"}
+            </span>
           </div>
           <div className="flex justify-between">
             <span className="font-semibold">Image dimensions</span>
-            <span>2520 × 3080</span>
+            <span>
+              {product.dimensions
+                ? `${product.dimensions.width} × ${product.dimensions.height}`
+                : "-"}
+            </span>
           </div>
         </div>
       </div>
@@ -47,7 +58,7 @@ export default function ProductInfo({ product }) {
       </div>
 
       <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition duration-200">
-        Download Now
+        {isFree ? "Download Now" : `Buy for $${product.price?.toFixed(2)}`}
       </button>
     </div>
   );

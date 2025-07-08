@@ -6,6 +6,9 @@ export const maps = [
     original: 13.59,
     price: 9.11,
     categories: ["Forest", "Road"],
+    description: "A lush summer forest with a winding road for travel scenes.",
+    dimensions: { width: 4200, height: 2800 },
+    gridSize: 140,
   },
   {
     title: "Desert Ruin Map",
@@ -14,6 +17,9 @@ export const maps = [
     original: 49.99,
     price: 39.99,
     categories: ["Desert", "Ruins"],
+    description: "Ancient ruins buried in a scorching desert landscape.",
+    dimensions: { width: 5600, height: 4200 },
+    gridSize: 140,
   },
   {
     title: "Ruin Building within Swamp",
@@ -22,6 +28,9 @@ export const maps = [
     original: 20.69,
     price: 11.38,
     categories: ["Swamp", "Ruins"],
+    description: "A decrepit building surrounded by a murky swamp.",
+    dimensions: { width: 3500, height: 2800 },
+    gridSize: 140,
   },
   {
     title: "A Japanese City with the Adventurers Guild Japanese Style Preview",
@@ -30,6 +39,9 @@ export const maps = [
     original: 42.0,
     price: 12.6,
     categories: ["City", "Japanese", "Guild"],
+    description: "Traditional Japanese-style city with a central adventurer's guild.",
+    dimensions: { width: 5000, height: 3000 },
+    gridSize: 140,
   },
   {
     title: "Forest with a Small Lake",
@@ -39,6 +51,9 @@ export const maps = [
     price: 14.25,
     live: true,
     categories: ["Forest", "Lake"],
+    description: "Tranquil lake nestled in the middle of a quiet forest.",
+    dimensions: { width: 4200, height: 2800 },
+    gridSize: 140,
   },
   {
     title: "Magical Store within City",
@@ -46,6 +61,9 @@ export const maps = [
     price: 0,
     free: true,
     categories: ["City", "Store", "Magic"],
+    description: "A mystical shop located deep in a fantasy city district.",
+    dimensions: { width: 2800, height: 2100 },
+    gridSize: 140,
   },
   {
     title: "A Beach Without any Structure",
@@ -54,6 +72,9 @@ export const maps = [
     original: 20.69,
     price: 16.56,
     categories: ["Beach", "Open"],
+    description: "An open and empty beach, perfect for encounters or camps.",
+    dimensions: { width: 4000, height: 2800 },
+    gridSize: 140,
   },
   {
     title: "Greek Style City Center with a Fountain as Middle Part Top Version 1",
@@ -61,6 +82,9 @@ export const maps = [
     price: 0,
     free: true,
     categories: ["City", "Greek", "Fountain"],
+    description: "A stone-paved Greek city center with a majestic fountain.",
+    dimensions: { width: 4800, height: 3200 },
+    gridSize: 140,
   },
   {
     title: "Spring Forest Road Map",
@@ -69,6 +93,9 @@ export const maps = [
     original: 16.9,
     price: 11.83,
     categories: ["Forest", "Spring", "Road"],
+    description: "Vibrant forest road in full bloom during springtime.",
+    dimensions: { width: 4200, height: 2800 },
+    gridSize: 140,
   },
   {
     title: "A Small Village Top Version 2",
@@ -77,6 +104,9 @@ export const maps = [
     original: 11.59,
     price: 5.79,
     categories: ["Village", "Top View"],
+    description: "Overhead view of a peaceful and compact village.",
+    dimensions: { width: 3800, height: 2600 },
+    gridSize: 140,
   },
   {
     title: "Forest Opening",
@@ -86,6 +116,9 @@ export const maps = [
     price: 11.13,
     live: true,
     categories: ["Forest", "Clearing"],
+    description: "A spacious clearing deep within a dense forest.",
+    dimensions: { width: 4200, height: 2800 },
+    gridSize: 140,
   },
   {
     title: "Church within Forest",
@@ -93,5 +126,8 @@ export const maps = [
     price: 0,
     free: true,
     categories: ["Church", "Forest"],
+    description: "An old church hidden away in the middle of a forest.",
+    dimensions: { width: 4000, height: 3000 },
+    gridSize: 140,
   },
 ];

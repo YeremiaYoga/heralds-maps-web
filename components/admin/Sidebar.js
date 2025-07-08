@@ -1,6 +1,13 @@
 "use client";
 
-const menuItems = ["Home", "Dashboard", "Manage Products", "Settings", "Logout"];
+const menuItems = [
+  "Home",
+  "Dashboard",
+  "Manage Products",
+  "Manage User",
+  "Settings",
+  "Logout",
+];
 
 export default function Sidebar({ selectedMenu, setSelectedMenu }) {
   return (
