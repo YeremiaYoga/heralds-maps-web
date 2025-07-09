@@ -6,6 +6,7 @@ const users = [
     subscribed: true,
     subscriptionType: "monthly",
     subscriptionTier: "premium",
+    subscriptionStart: "2025-07-01T00:00:00.000Z",
     subscriptionEnd: "2025-08-08T00:00:00.000Z",
   },
   {
@@ -15,6 +16,7 @@ const users = [
     subscribed: false,
     subscriptionType: "yearly",
     subscriptionTier: "standard",
+    subscriptionStart: null,
     subscriptionEnd: null,
   },
   {
@@ -24,6 +26,7 @@ const users = [
     subscribed: true,
     subscriptionType: "yearly",
     subscriptionTier: "standard",
+    subscriptionStart: "2025-07-01T00:00:00.000Z",
     subscriptionEnd: "2026-07-01T00:00:00.000Z",
   },
   {
@@ -33,6 +36,7 @@ const users = [
     subscribed: true,
     subscriptionType: "monthly",
     subscriptionTier: "premium",
+    subscriptionStart: "2025-07-01T00:00:00.000Z",
     subscriptionEnd: "2025-07-31T00:00:00.000Z",
   },
   {
@@ -42,6 +46,7 @@ const users = [
     subscribed: false,
     subscriptionType: "monthly",
     subscriptionTier: "standard",
+    subscriptionStart: null,
     subscriptionEnd: null,
   },
   {
@@ -51,6 +56,7 @@ const users = [
     subscribed: true,
     subscriptionType: "yearly",
     subscriptionTier: "premium",
+    subscriptionStart: "2025-06-01T00:00:00.000Z",
     subscriptionEnd: "2026-06-01T00:00:00.000Z",
   },
 ];

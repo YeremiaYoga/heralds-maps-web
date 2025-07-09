@@ -5,8 +5,7 @@ import { maps } from "@/data/maps";
 import ProductImages from "./ProductImages";
 import ProductInfo from "./ProductInfo";
 import RelatedMaps from "./RelatedMaps";
-
-import { ChevronLeft, ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -27,57 +26,66 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <main className="min-h-screen text-white px-6 py-10">
-      <div className="max-w-6xl mx-auto relative">
-        <div className="flex items-center gap-3 mb-6">
+    <main className="min-h-screen text-white px-6 py-10 ">
+      <div className="flex justify-between items-center mb-10 max-w-6xl mx-auto">
+        {prevProduct ? (
+          <button
+            onClick={() => goToProduct(prevProduct)}
+            className="flex items-center gap-3 group text-gray-400 hover:text-white transition"
+            title="Previous Map"
+          >
+            <ChevronLeft className="w-5 h-5" />
+            <img
+              src={prevProduct.image}
+              alt={prevProduct.title}
+              className="w-20 h-12 object-cover rounded shadow-md border border-gray-600"
+            />
+            <span className="hidden sm:inline text-sm font-medium truncate max-w-[100px] group-hover:underline">
+              {prevProduct.title}
+            </span>
+          </button>
+        ) : (
+          <div />
+        )}
+
+        {nextProduct && (
+          <button
+            onClick={() => goToProduct(nextProduct)}
+            className="flex items-center gap-3 group text-gray-400 hover:text-white transition"
+            title="Next Map"
+          >
+            <span className="hidden sm:inline text-sm font-medium truncate max-w-[100px] group-hover:underline">
+              {nextProduct.title}
+            </span>
+            <img
+              src={nextProduct.image}
+              alt={nextProduct.title}
+              className="w-20 h-12 object-cover rounded shadow-md border border-gray-600"
+            />
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+      </div>
+
+      <div className="max-w-6xl mx-auto space-y-10">
+        <div className="flex items-center gap-3">
           <button
             onClick={() => router.push("/products")}
             className="text-xl hover:text-gray-400 flex items-center"
-            title="Back"
+            title="Back to Products"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
-          <h1 className="text-2xl md:text-3xl font-bold truncate">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight truncate 0">
             {product.title}
           </h1>
         </div>
 
-        <div className="absolute top-0 right-0 mt-2 mr-2 flex gap-4 z-10">
-          {prevProduct && (
-            <button
-              onClick={() => goToProduct(prevProduct)}
-              className="flex items-center gap-2 hover:text-white text-gray-300 text-sm"
-              title="Previous"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <img
-                src={prevProduct.image}
-                alt={prevProduct.title}
-                className="w-20 h-12 object-cover rounded shadow"
-              />
-            </button>
-          )}
-
-          {nextProduct && (
-            <button
-              onClick={() => goToProduct(nextProduct)}
-              className="flex items-center gap-2 hover:text-white text-gray-300 text-sm"
-              title="Next"
-            >
-              <img
-                src={nextProduct.image}
-                alt={nextProduct.title}
-                className="w-20 h-12 object-cover rounded shadow"
-              />
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          )}
-        </div>
-
-        <div className="flex flex-col md:flex-row gap-10 mt-6">
+        <div className="flex flex-col md:flex-row gap-10">
           <ProductImages product={product} />
           <ProductInfo product={product} />
         </div>
+
         <RelatedMaps
           currentTitle={product.title}
           categories={product.categories}

@@ -47,7 +47,7 @@ export default function RelatedMaps({ currentTitle, categories }) {
           <ChevronRight className="w-6 h-6 text-white" />
         </button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-10 bg-black/50 p-2 rounded-2xl">
           {visibleMaps.map((map, idx) => (
             <Link
               key={idx}

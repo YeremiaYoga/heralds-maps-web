@@ -24,7 +24,7 @@ export default function ProductImages({ product }) {
         />
       </div>
 
-      <div className="flex gap-3 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+      <div className="flex gap-3 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 bg-black/50 p-2 rounded-xl">
         {[product.image, ...thumbnails].map((img, idx) => (
           <div
             key={idx}

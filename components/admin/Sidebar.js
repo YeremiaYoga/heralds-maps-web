@@ -1,28 +1,43 @@
 "use client";
 
+import {
+  Home,
+  BarChart,
+  Package,
+  Users,
+  Settings,
+  LogOut,
+  CreditCard, 
+} from "lucide-react";
+
 const menuItems = [
-  "Home",
-  "Dashboard",
-  "Manage Products",
-  "Manage User",
-  "Settings",
-  "Logout",
+  { label: "Home", icon: <Home size={18} /> },
+  { label: "Dashboard", icon: <BarChart size={18} /> },
+  { label: "Manage Products", icon: <Package size={18} /> },
+  { label: "Manage User", icon: <Users size={18} /> },
+  { label: "Subcription", icon: <CreditCard size={18} /> }, 
+  { label: "Settings", icon: <Settings size={18} /> },
+  { label: "Logout", icon: <LogOut size={18} /> },
 ];
 
 export default function Sidebar({ selectedMenu, setSelectedMenu }) {
   return (
-    <aside className="w-64 bg-[#2a475e] p-6 space-y-6">
-      <h2 className="text-2xl font-bold">Admin</h2>
+    <aside className="w-64 bg-[#1e3a4c] text-white p-6 space-y-6 min-h-screen">
+      <h2 className="text-2xl font-bold mb-4">Admin</h2>
       <nav className="space-y-2">
-        {menuItems.map((item) => (
+        {menuItems.map(({ label, icon }) => (
           <button
-            key={item}
-            onClick={() => setSelectedMenu(item)}
-            className={`block w-full text-left px-4 py-2 rounded hover:bg-[#3a5a70] transition ${
-              selectedMenu === item ? "bg-[#3a5a70]" : ""
-            }`}
+            key={label}
+            onClick={() => setSelectedMenu(label)}
+            className={`flex items-center gap-3 w-full px-4 py-2 rounded transition font-medium 
+              ${
+                selectedMenu === label
+                  ? "bg-yellow-500 text-black"
+                  : "hover:bg-[#2e4f63]"
+              }`}
           >
-            {item}
+            {icon}
+            {label}
           </button>
         ))}
       </nav>
