@@ -1,13 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Pencil, Trash2, Save, X } from "lucide-react";
+import { Pencil, Trash2, Save, X, Eye, EyeOff } from "lucide-react";
 import dummyUsers from "@/data/users";
+import { maps } from "@/data/maps";
 
 export default function UserManager() {
   const [users, setUsers] = useState(dummyUsers);
   const [editingUserId, setEditingUserId] = useState(null);
   const [editedUser, setEditedUser] = useState({});
+  const [viewingUser, setViewingUser] = useState(null);
+  const [showPassword, setShowPassword] = useState(false); // for modal
+  const [showTablePasswords, setShowTablePasswords] = useState({}); // for table
 
   const handleEdit = (user) => {
     setEditingUserId(user.id);
@@ -40,6 +44,7 @@ export default function UserManager() {
             <tr className="text-left text-gray-300 uppercase text-xs tracking-wider">
               <th className="p-3">Name</th>
               <th className="p-3">Email</th>
+              <th className="p-3">Password</th>
               <th className="p-3">Status</th>
               <th className="p-3 text-right">Actions</th>
             </tr>
@@ -79,6 +84,7 @@ export default function UserManager() {
                           className="w-full px-3 py-1 rounded bg-[#2e3f4f] text-white outline-none"
                         />
                       </td>
+                      <td className="p-3 text-gray-400 italic">Not editable</td>
                       <td className="p-3">
                         <select
                           value={editedUser.subscribed ? "yes" : "no"}
@@ -115,6 +121,27 @@ export default function UserManager() {
                     <>
                       <td className="p-3 font-medium">{user.name}</td>
                       <td className="p-3 text-gray-300">{user.email}</td>
+                      <td className="p-3 font-mono text-sm">
+                        {showTablePasswords[user.id]
+                          ? user.password
+                          : "•".repeat(user.password.length)}
+                        <button
+                          onClick={() =>
+                            setShowTablePasswords((prev) => ({
+                              ...prev,
+                              [user.id]: !prev[user.id],
+                            }))
+                          }
+                          className="ml-2 text-cyan-400 hover:text-cyan-300"
+                          title="Toggle Password"
+                        >
+                          {showTablePasswords[user.id] ? (
+                            <EyeOff size={14} />
+                          ) : (
+                            <Eye size={14} />
+                          )}
+                        </button>
+                      </td>
                       <td className="p-3">
                         <span
                           className={`px-3 py-1 text-xs font-bold rounded-full ${
@@ -127,6 +154,13 @@ export default function UserManager() {
                         </span>
                       </td>
                       <td className="p-3 text-right space-x-2">
+                        <button
+                          onClick={() => setViewingUser(user)}
+                          className="bg-cyan-600 hover:bg-cyan-500 text-white px-2 py-1 rounded inline-flex items-center gap-1"
+                        >
+                          <Eye size={14} />
+                          View
+                        </button>
                         <button
                           onClick={() => handleEdit(user)}
                           className="bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded inline-flex items-center gap-1"
@@ -150,6 +184,85 @@ export default function UserManager() {
           </tbody>
         </table>
       </div>
+
+      {/* Modal View User */}
+      {viewingUser && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-[#1a1f2b] text-white p-6 rounded-lg shadow-xl w-full max-w-2xl space-y-4">
+            <div className="flex justify-between items-center border-b border-gray-600 pb-2">
+              <h3 className="text-xl font-bold">User Detail</h3>
+              <button
+                onClick={() => {
+                  setViewingUser(null);
+                  setShowPassword(false);
+                }}
+                className="text-gray-300 hover:text-white"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="space-y-2">
+              <p><strong>Name:</strong> {viewingUser.name}</p>
+              <p><strong>Email:</strong> {viewingUser.email}</p>
+              <p>
+                <strong>Status:</strong>{" "}
+                <span
+                  className={`font-semibold ${
+                    viewingUser.subscribed ? "text-green-400" : "text-red-400"
+                  }`}
+                >
+                  {viewingUser.subscribed ? "Subscribed" : "Not Subscribed"}
+                </span>
+              </p>
+              <p>
+                <strong>Password:</strong>{" "}
+                <span className="bg-[#2e3f4f] px-2 py-1 rounded font-mono">
+                  {showPassword
+                    ? viewingUser.password
+                    : "•".repeat(viewingUser.password.length)}
+                </span>
+                <button
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="ml-2 text-sm text-cyan-400 hover:underline"
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </p>
+
+              <div>
+                <strong>Favorite Maps:</strong>
+                {viewingUser.favorite.length === 0 ? (
+                  <p className="text-gray-400 mt-1">No favorites</p>
+                ) : (
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                    {maps
+                      .filter((map) => viewingUser.favorite.includes(map.id))
+                      .map((map) => (
+                        <li
+                          key={map.id}
+                          className="flex items-center gap-3 bg-[#263343] p-2 rounded"
+                        >
+                          <img
+                            src={map.image}
+                            alt={map.title}
+                            className="w-16 h-16 object-cover rounded border border-gray-700"
+                          />
+                          <div>
+                            <p className="font-semibold">{map.title}</p>
+                            <p className="text-xs text-gray-400">
+                              {map.categories?.join(", ")}
+                            </p>
+                          </div>
+                        </li>
+                      ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

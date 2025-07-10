@@ -56,6 +56,13 @@ export default function Navbar() {
                   >
                     Manage Account
                   </Link>
+                  <Link
+                    href="/favorites"
+                    onClick={() => setShowMenu(false)}
+                    className="block px-4 py-2 hover:bg-[#444]"
+                  >
+                    Favorite
+                  </Link>
                   <button
                     onClick={handleLogout}
                     className="block w-full text-left px-4 py-2 hover:bg-[#444]"

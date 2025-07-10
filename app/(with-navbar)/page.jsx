@@ -1,7 +1,7 @@
 import SubNavbar from "../../components/SubNavbar";
 import HeroBanner from "../../components/HeroBanner";
 import MapsCarousel from "../../components/MapsCarousel";
-import DiscountSection from "../../components/DiscountSection";
+import ReleaseSection from "../../components/ReleaseSection";
 import MapsGrid from "../../components/MapsGrid";
 import CategoryCarousel from "../../components/CategoryCarousel";
 
@@ -11,7 +11,7 @@ export default function HomePage() {
       <SubNavbar />
       <HeroBanner />
       <MapsCarousel />
-      <DiscountSection />
+      <ReleaseSection />
       <CategoryCarousel />
       <MapsGrid />
     </main>

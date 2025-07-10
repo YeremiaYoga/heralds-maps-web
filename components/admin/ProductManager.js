@@ -11,20 +11,14 @@ export default function ProductManager() {
     image: "",
     title: "",
     description: "",
-    type: "free",
-    price: "",
-    discount: "",
   });
   const [showModal, setShowModal] = useState(false);
   const [selectedMap, setSelectedMap] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    setForm({
-      ...form,
-      [name]: type === "number" ? parseFloat(value) : value,
-    });
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
   };
 
   const handleImageUpload = (e) => {
@@ -40,27 +34,29 @@ export default function ProductManager() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const finalPrice =
-      form.type === "paid" && form.discount
-        ? (form.price * (1 - form.discount / 100)).toFixed(2)
-        : form.price;
-
-    setProducts([...products, { ...form, price: parseFloat(finalPrice) }]);
-    setForm({
-      image: "",
-      title: "",
-      description: "",
-      type: "free",
-      price: "",
-      discount: "",
-    });
+    const newProduct = {
+      ...form,
+      id: Date.now(),
+      active: true,
+      isFavorited: [],
+    };
+    setProducts([...products, newProduct]);
+    setForm({ image: "", title: "", description: "" });
     setShowModal(false);
+  };
+
+  const toggleActive = (id) => {
+    setProducts((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, active: !item.active } : item
+      )
+    );
   };
 
   return (
     <div className="space-y-6 text-white">
       <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-bold">Manage Products</h2>
+        <h2 className="text-3xl font-bold">List Products</h2>
         <button
           className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-300 text-black rounded-md font-semibold hover:brightness-110"
           onClick={() => setShowModal(true)}
@@ -106,36 +102,6 @@ export default function ProductManager() {
                 onChange={handleChange}
                 required
               />
-              <select
-                name="type"
-                className="w-full p-2 rounded bg-[#2e3f4f] text-white"
-                value={form.type}
-                onChange={handleChange}
-              >
-                <option value="free">Free</option>
-                <option value="paid">Paid</option>
-              </select>
-              {form.type === "paid" && (
-                <>
-                  <input
-                    name="price"
-                    type="number"
-                    placeholder="Price (USD)"
-                    className="w-full p-2 rounded bg-[#2e3f4f] text-white"
-                    value={form.price}
-                    onChange={handleChange}
-                    required
-                  />
-                  <input
-                    name="discount"
-                    type="number"
-                    placeholder="Discount (%)"
-                    className="w-full p-2 rounded bg-[#2e3f4f] text-white"
-                    value={form.discount}
-                    onChange={handleChange}
-                  />
-                </>
-              )}
               <div className="flex justify-end gap-2">
                 <button
                   type="button"
@@ -162,12 +128,9 @@ export default function ProductManager() {
           <thead className="bg-[#22384e]">
             <tr>
               <th className="p-3 text-left">Image</th>
-              <th className="p-3 text-left text-sm">Title</th>
+              <th className="p-3 text-left">Title</th>
               <th className="p-3 text-left">Description</th>
-              <th className="p-3 text-left">Type</th>
-              <th className="p-3 text-left">Original</th>
-              <th className="p-3 text-left">Discount</th>
-              <th className="p-3 text-left">Final</th>
+              <th className="p-3 text-left">Active</th>
               <th className="p-3 text-left">Dimensions</th>
               <th className="p-3 text-left">Grid Size</th>
               <th className="p-3 text-right">Actions</th>
@@ -175,13 +138,9 @@ export default function ProductManager() {
           </thead>
           <tbody>
             {products.map((product, idx) => {
-              const isFree = product.price === 0 || product.free;
               const rowColor = idx % 2 === 0 ? "bg-[#1c2a38]" : "bg-[#1a252f]";
               return (
-                <tr
-                  key={idx}
-                  className={`${rowColor} border-b border-[#2c3e50]`}
-                >
+                <tr key={product.id} className={`${rowColor} border-b border-[#2c3e50]`}>
                   <td className="p-3">
                     <img
                       src={product.image}
@@ -189,29 +148,20 @@ export default function ProductManager() {
                       className="w-14 h-14 object-cover rounded shadow"
                     />
                   </td>
-                  <td className="p-3 font-medium text-sm">{product.title}</td>
+                  <td className="p-3 font-medium">{product.title}</td>
                   <td className="p-3 text-gray-300 max-w-[250px] text-xs">
                     {product.description}
                   </td>
                   <td className="p-3">
-                    <span
-                      className={`text-xs font-semibold px-2 py-1 rounded-full ${
-                        isFree
-                          ? "bg-green-700 text-green-100"
-                          : "bg-yellow-700 text-yellow-100"
-                      }`}
-                    >
-                      {isFree ? "Free" : "Paid"}
-                    </span>
-                  </td>
-                  <td className="p-3">
-                    {!isFree ? `$${product.original?.toFixed(2)}` : "-"}
-                  </td>
-                  <td className="p-3">
-                    {!isFree && product.discount ? `${product.discount}%` : "-"}
-                  </td>
-                  <td className="p-3">
-                    {!isFree ? `$${product.price?.toFixed(2)}` : "Free"}
+                    <label className="inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={product.active}
+                        onChange={() => toggleActive(product.id)}
+                        className="sr-only peer"
+                      />
+                      <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer dark:bg-gray-700 peer-checked:bg-green-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white relative"></div>
+                    </label>
                   </td>
                   <td className="p-3">
                     {product.dimensions
@@ -241,10 +191,7 @@ export default function ProductManager() {
       </div>
 
       {selectedMap && (
-        <MapDetailModal
-          map={selectedMap}
-          onClose={() => setSelectedMap(null)}
-        />
+        <MapDetailModal map={selectedMap} onClose={() => setSelectedMap(null)} />
       )}
     </div>
   );

@@ -1,17 +1,23 @@
 "use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import users from "@/data/users";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("user@gmail.com");
-  const [password, setPassword] = useState("user");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (email === "user@gmail.com" && password === "user") {
-      localStorage.setItem("username", "user");
+    const matchedUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (matchedUser) {
+      localStorage.setItem("username", matchedUser.name); // simpan nama
       router.push("/");
     } else {
       alert("Email atau password salah");

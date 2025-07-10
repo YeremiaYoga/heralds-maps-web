@@ -1,15 +1,29 @@
 "use client";
 import { useEffect, useState } from "react";
 import Tilt from "react-parallax-tilt";
-
-
-import { maps } from "@/data/maps";
+import { maps as allMaps } from "@/data/maps";
 
 const ITEMS_PER_PAGE = 3;
 
+function shuffleArray(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 export default function MapsCarousel() {
   const [pageIndex, setPageIndex] = useState(0);
-  const totalPages = Math.ceil(maps.length / ITEMS_PER_PAGE);
+  const [shuffledMaps, setShuffledMaps] = useState([]);
+
+  useEffect(() => {
+    const filtered = allMaps.filter((map) => map.active);
+    setShuffledMaps(shuffleArray(filtered));
+  }, []);
+
+  const totalPages = Math.ceil(shuffledMaps.length / ITEMS_PER_PAGE);
 
   const nextPage = () => {
     setPageIndex((prev) => (prev + 1) % totalPages);
@@ -24,9 +38,9 @@ export default function MapsCarousel() {
       nextPage();
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [shuffledMaps]);
 
-  const currentMaps = maps.slice(
+  const currentMaps = shuffledMaps.slice(
     pageIndex * ITEMS_PER_PAGE,
     pageIndex * ITEMS_PER_PAGE + ITEMS_PER_PAGE
   );
@@ -45,15 +59,15 @@ export default function MapsCarousel() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {currentMaps.map((map, index) => (
               <Tilt
-                key={index}
+                key={map.id || index}
                 tiltMaxAngleX={-10}
                 tiltMaxAngleY={-10}
                 perspective={800}
                 glareEnable={true}
                 glareMaxOpacity={0.1}
                 glareBorderRadius="12px"
-                transitionSpeed={8000} 
-                scale={0.95} 
+                transitionSpeed={8000}
+                scale={0.95}
                 className="rounded overflow-hidden shadow-lg"
               >
                 <div className="relative group">

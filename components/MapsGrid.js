@@ -1,13 +1,15 @@
 "use client";
 
-
 import { maps } from "@/data/maps";
 
 export default function MapsGrid() {
+  // Filter hanya map yang aktif
+  const activeMaps = maps.filter((map) => map.active);
+
   return (
     <div className="px-8 py-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {maps.map((map, idx) => (
+        {activeMaps.map((map, idx) => (
           <div
             key={idx}
             className="relative bg-gradient-to-r from-[#FFD700]/20 to-[#1b2838] shadow-lg rounded overflow-hidden hover:scale-[1.02] transition-transform duration-200"
@@ -18,36 +20,28 @@ export default function MapsGrid() {
                 alt={map.title}
                 className="w-full h-40 object-cover"
               />
-              <div className="absolute top-1 left-1 space-y-1">
-                {map.free && (
-                  <div className="relative w-14">
-                    <img
-                      src="/assets/bubble_free.webp"
-                      alt="Free"
-                      className="w-full"
-                    />
-                    <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-white">
-                      FREE
-                    </span>
-                  </div>
-                )}
-                {!map.free && map.discount && (
-                  <div className="relative w-14">
-                    <img
-                      src="/assets/bubble_discount.webp"
-                      alt="Discount"
-                      className="w-full"
-                    />
-                    <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-white">
-                      {map.discount}
-                    </span>
-                  </div>
-                )}
+              <div className="absolute top-1 left-1">
+                <div className="relative w-14">
+                  <img
+                    src={
+                      map.type === "free"
+                        ? "/assets/bubble_free.webp"
+                        : "/assets/bubble_subscribe.webp"
+                    }
+                    alt={map.type === "free" ? "Free" : "Subscribe"}
+                    className="w-full"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white">
+                    {map.type === "free" ? "Free" : "Subscribe"}
+                  </span>
+                </div>
               </div>
             </div>
 
             <div className="p-4 text-white flex flex-col justify-between space-y-2 min-h-[90px]">
-              <h3 className="font-semibold text-sm text-[#cfcfcf]">{map.title}</h3>
+              <h3 className="font-semibold text-sm text-[#cfcfcf]">
+                {map.title}
+              </h3>
 
               {map.categories && map.categories.length > 0 && (
                 <div className="flex flex-wrap gap-2">

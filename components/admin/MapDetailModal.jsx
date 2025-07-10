@@ -1,11 +1,17 @@
 "use client";
 
+import users from "@/data/users";
+
 export default function MapDetailModal({ map, onClose }) {
   if (!map) return null;
 
+  const favoritedByUsers = users.filter((user) =>
+    map.isFavorited?.includes(user.id)
+  );
+
   return (
     <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-6 backdrop-blur-sm">
-      <div className="bg-[#101820] text-white p-8 rounded-2xl shadow-2xl w-full max-w-6xl relative border border-[#2a3b4c]">
+      <div className="bg-[#101820] text-white p-8 rounded-2xl shadow-2xl w-full max-w-5xl relative border border-[#2a3b4c]">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -38,31 +44,15 @@ export default function MapDetailModal({ map, onClose }) {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm border-t border-[#2a3b4c] pt-4">
               <div>
-                <span className="text-gray-400">Type:</span>{" "}
-                <span className="font-semibold text-white">
-                  {map.price === 0 || map.free ? "Free" : "Paid"}
+                <span className="text-gray-400">Active:</span>{" "}
+                <span
+                  className={`font-semibold ${
+                    map.active ? "text-green-400" : "text-red-400"
+                  }`}
+                >
+                  {map.active ? "Yes" : "No"}
                 </span>
               </div>
-
-              {map.price > 0 && (
-                <>
-                  <div>
-                    <span className="text-gray-400">Original Price:</span>{" "}
-                    <span>${map.original?.toFixed(2)}</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-400">Discount:</span>{" "}
-                    <span>{map.discount}%</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-400">Final Price:</span>{" "}
-                    <span className="text-green-400 font-semibold">
-                      ${map.price?.toFixed(2)}
-                    </span>
-                  </div>
-                </>
-              )}
-
               <div>
                 <span className="text-gray-400">Dimensions:</span>{" "}
                 <span>
@@ -73,7 +63,7 @@ export default function MapDetailModal({ map, onClose }) {
               </div>
               <div>
                 <span className="text-gray-400">Grid Size:</span>{" "}
-                <span>{map.gridSize ? `${map.gridSize} px/tile` : "-"}</span>
+                <span>{map.gridSize ? `${map.gridSize}px / tile` : "-"}</span>
               </div>
               {map.dimensions && map.gridSize && (
                 <div>
@@ -89,6 +79,24 @@ export default function MapDetailModal({ map, onClose }) {
                 <span className="text-gray-400">Categories:</span>{" "}
                 <span>{map.categories?.join(", ") || "-"}</span>
               </div>
+            </div>
+
+            {/* Favorited By */}
+            <div className="pt-4 border-t border-[#2a3b4c]">
+              <h4 className="text-sm font-semibold text-gray-400 mb-2">
+                Favorited By:
+              </h4>
+              {favoritedByUsers.length > 0 ? (
+                <ul className="list-disc pl-5 space-y-1 text-sm text-white">
+                  {favoritedByUsers.map((user) => (
+                    <li key={user.id}>{user.name} ({user.email})</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500 text-sm">
+                  No users have favorited this map.
+                </p>
+              )}
             </div>
           </div>
         </div>
