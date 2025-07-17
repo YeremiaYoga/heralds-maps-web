@@ -1,20 +1,39 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { maps } from "@/data/maps";
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 export default function ProductsPage() {
+  const [maps, setMaps] = useState([]);
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
+  useEffect(() => {
+    const fetchMaps = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/products`);
+        const data = await res.json();
+        if (data.success) {
+          setMaps(data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch maps:", error);
+      }
+    };
+
+    fetchMaps();
+  }, []);
+
   const allCategories = Array.from(
-    new Set(maps.flatMap((map) => map.categories))
+    new Set(maps.flatMap((map) => map.categories || []))
   ).sort();
 
   const filteredMaps = maps.filter((map) => {
-    const matchesQuery = map.title.toLowerCase().includes(query.toLowerCase());
+    const matchesQuery = map.title?.toLowerCase().includes(query.toLowerCase());
     const matchesCategory = selectedCategory
-      ? map.categories.includes(selectedCategory)
+      ? (map.categories || []).includes(selectedCategory)
       : true;
     return matchesQuery && matchesCategory;
   });
@@ -47,13 +66,13 @@ export default function ProductsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredMaps.map((map) => (
           <Link
-            key={map.title}
+            key={map._id}
             href={`/products/${encodeURIComponent(map.title)}`}
             className="group relative overflow-hidden rounded-lg shadow-md bg-[#1b2838] transition-transform duration-300 hover:scale-105"
           >
             <div className="relative w-full aspect-[3/4] overflow-hidden">
               <img
-                src={map.image}
+                src={`${API_BASE}/uploads/${map.image}`}
                 alt={map.title}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-125"
               />

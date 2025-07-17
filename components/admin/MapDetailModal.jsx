@@ -9,6 +9,16 @@ export default function MapDetailModal({ map, onClose }) {
     map.isFavorited?.includes(user.id)
   );
 
+  const formatDate = (iso) => {
+    if (!iso) return "-";
+    const date = new Date(iso);
+    return date.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   return (
     <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-6 backdrop-blur-sm">
       <div className="bg-[#101820] text-white p-8 rounded-2xl shadow-2xl w-full max-w-5xl relative border border-[#2a3b4c]">
@@ -69,9 +79,9 @@ export default function MapDetailModal({ map, onClose }) {
                 <div>
                   <span className="text-gray-400">Grid Tiles:</span>{" "}
                   <span className="text-cyan-400 font-semibold">
-                    {`${Math.round(map.dimensions.width / map.gridSize)} × ${Math.round(
-                      map.dimensions.height / map.gridSize
-                    )}`}
+                    {`${Math.round(
+                      map.dimensions.width / map.gridSize
+                    )} × ${Math.round(map.dimensions.height / map.gridSize)}`}
                   </span>
                 </div>
               )}
@@ -89,7 +99,9 @@ export default function MapDetailModal({ map, onClose }) {
               {favoritedByUsers.length > 0 ? (
                 <ul className="list-disc pl-5 space-y-1 text-sm text-white">
                   {favoritedByUsers.map((user) => (
-                    <li key={user.id}>{user.name} ({user.email})</li>
+                    <li key={user.id}>
+                      {user.name} ({user.email})
+                    </li>
                   ))}
                 </ul>
               ) : (
@@ -97,6 +109,18 @@ export default function MapDetailModal({ map, onClose }) {
                   No users have favorited this map.
                 </p>
               )}
+            </div>
+
+            {/* Created/Updated Time */}
+            <div className="pt-4 border-t border-[#2a3b4c] text-sm text-gray-400 space-y-1">
+              <p>
+                <span className="font-semibold">Created At:</span>{" "}
+                {formatDate(map.created_at)}
+              </p>
+              <p>
+                <span className="font-semibold">Updated At:</span>{" "}
+                {formatDate(map.updated_at)}
+              </p>
             </div>
           </div>
         </div>

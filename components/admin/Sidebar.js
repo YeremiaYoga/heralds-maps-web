@@ -7,7 +7,8 @@ import {
   Users,
   Settings,
   LogOut,
-  CreditCard, 
+  CreditCard,
+  FolderKanban,
 } from "lucide-react";
 
 const menuItems = [
@@ -15,7 +16,8 @@ const menuItems = [
   { label: "Dashboard", icon: <BarChart size={18} /> },
   { label: "Manage Products", icon: <Package size={18} /> },
   { label: "Manage User", icon: <Users size={18} /> },
-  { label: "Subcription", icon: <CreditCard size={18} /> }, 
+  { label: "Subcription", icon: <CreditCard size={18} /> },
+  { label: "Manage Categories", icon: <FolderKanban size={18} /> },
   { label: "Settings", icon: <Settings size={18} /> },
   { label: "Logout", icon: <LogOut size={18} /> },
 ];

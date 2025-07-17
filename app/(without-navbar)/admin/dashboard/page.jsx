@@ -7,14 +7,16 @@ import Sidebar from "@/components/admin/Sidebar";
 import HomeManager from "@/components/admin/HomeManager";
 import ProductManager from "@/components/admin/ProductManager";
 import UserManager from "@/components/admin/UserManager";
-import Subcription from "@/components/admin/Subcription"; // ✅ Tambahkan ini
+import Subcription from "@/components/admin/Subcription"; 
+import CategoriesManager from "@/components/admin/CategoriesManager"; // ✅ Tambahkan ini
 
 const menuComponents = {
   Home: <HomeManager />,
   Dashboard: <p className="text-gray-300">Welcome to your admin dashboard.</p>,
   "Manage Products": <ProductManager />,
   "Manage User": <UserManager />,
-  Subcription: <Subcription />, // ✅ Tambahkan ini
+  Subcription: <Subcription />,
+  "Manage Categories": <CategoriesManager />,
   Settings: <p className="text-gray-300">Update your admin settings here.</p>,
   Logout: <p className="text-red-400">You have been logged out.</p>,
 };

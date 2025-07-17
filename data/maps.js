@@ -10,6 +10,8 @@ export const maps = [
     active: true,
     isFavorited: [1, 4, 6],
     type: "subscribe",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 2,
@@ -22,6 +24,8 @@ export const maps = [
     active: true,
     isFavorited: [3],
     type: "subscribe",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 3,
@@ -34,6 +38,8 @@ export const maps = [
     active: false,
     isFavorited: [1],
     type: "subscribe",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 4,
@@ -46,6 +52,8 @@ export const maps = [
     active: true,
     isFavorited: [3, 4],
     type: "subscribe",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 5,
@@ -58,6 +66,8 @@ export const maps = [
     active: false,
     isFavorited: [1],
     type: "subscribe",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 6,
@@ -70,6 +80,8 @@ export const maps = [
     active: true,
     isFavorited: [4],
     type: "subscribe",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 7,
@@ -82,6 +94,8 @@ export const maps = [
     active: true,
     isFavorited: [6],
     type: "free",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 8,
@@ -94,6 +108,8 @@ export const maps = [
     active: false,
     isFavorited: [],
     type: "subscribe",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 9,
@@ -106,6 +122,8 @@ export const maps = [
     active: true,
     isFavorited: [],
     type: "free",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 10,
@@ -118,6 +136,8 @@ export const maps = [
     active: true,
     isFavorited: [],
     type: "subscribe",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 11,
@@ -130,6 +150,8 @@ export const maps = [
     active: true,
     isFavorited: [],
     type: "free",
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
   },
   {
     id: 12,
@@ -142,5 +164,7 @@ export const maps = [
     active: false,
     isFavorited: [],
     type: "subscribe",
-  },
+    created_at: "2025-07-11T00:00:00Z",
+    updated_at: "2025-07-11T00:00:00Z"
+  }
 ];
