@@ -13,11 +13,14 @@ export default function AdminLoginPage() {
     setIsLoading(true);
     setMessage("");
     try {
-      const res = await fetch("http://localhost:5000/api/admin/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         setStep(2);
@@ -35,17 +38,20 @@ export default function AdminLoginPage() {
     setIsLoading(true);
     setMessage("");
     try {
-      const res = await fetch("http://localhost:5000/api/admin/verify-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/verify-otp`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, otp }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         const expiry = Date.now() + 60 * 60 * 1000;
         localStorage.setItem(
           "admin_session",
-          JSON.stringify({ email, expiry })
+          JSON.stringify({ email, expiry, otp })
         );
 
         setMessage("Login success.");
@@ -61,7 +67,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="max-w-md mx-auto mt-20 p-6 border border-gray-300 rounded">
-      <h2 className="text-2xl font-bold mb-4 text-center">Admin Login</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
 
       {step === 1 && (
         <>
